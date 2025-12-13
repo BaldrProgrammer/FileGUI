@@ -5,6 +5,7 @@ partial class Form1
     private System.ComponentModel.IContainer components = null;
     
     private System.Windows.Forms.Panel loginPnl;
+    private System.Windows.Forms.Label loginLbl;
     private System.Windows.Forms.TextBox usernameTxt;
     private System.Windows.Forms.TextBox passwordTxt;
 
@@ -24,6 +25,13 @@ partial class Form1
         loginPnl.Size = new Size(200, 250);
         loginPnl.Location = new Point(300, 75);
         loginPnl.BackColor = Color.White;
+        
+        loginLbl = new Label();
+        loginLbl.Text = "LOGIN";
+        loginLbl.Size = new Size(100, 50);
+        loginLbl.Location = new Point(25, 10);
+        loginLbl.Font = new Font("Times New Roman", 15);
+        loginPnl.Controls.Add(loginLbl);
         
         usernameTxt = new TextBox();
         usernameTxt.Size = new Size(150, 20);
