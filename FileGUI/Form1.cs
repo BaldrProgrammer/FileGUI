@@ -7,9 +7,11 @@ public partial class Form1 : Form
         InitializeComponent();
     }
 
-    private void NodeClick(object sender, EventArgs e)
+    private void LogIn(object sender, EventArgs e)
     {
-        TreeView? senderr = sender as TreeView;
-        Console.WriteLine(senderr.SelectedNode.FullPath);
+        string username = usernameTxt.Text;
+        string password = passwordTxt.Text;
+        Console.Write(username + ' ');
+        Console.Write(password);
     }
 }
