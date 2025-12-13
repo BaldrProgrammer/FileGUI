@@ -21,18 +21,19 @@ partial class Form1
     private void InitializeComponent()
     {
         loginPnl = new Panel();
-        loginPnl.Size = new Size(400, 225);
+        loginPnl.Size = new Size(200, 250);
+        loginPnl.Location = new Point(300, 75);
         loginPnl.BackColor = Color.White;
         
         usernameTxt = new TextBox();
-        usernameTxt.Size = new Size(100, 20);
-        usernameTxt.Location = new Point(100, 50);
+        usernameTxt.Size = new Size(150, 20);
+        usernameTxt.Location = new Point(25, 50);
         loginPnl.Controls.Add(usernameTxt);
         
         passwordTxt = new TextBox();
-        passwordTxt.Size = new Size(100, 20);
-        passwordTxt.Location = new Point(100, 100);
-        loginPnl.Controls.Add(usernameTxt);
+        passwordTxt.Size = new Size(150, 20);
+        passwordTxt.Location = new Point(25, 100);
+        loginPnl.Controls.Add(passwordTxt);
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
@@ -41,7 +42,7 @@ partial class Form1
         
         components = new System.ComponentModel.Container();
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(800, 500);
         BackColor = Color.FromArgb(200, 200, 200);
         Text = "Авторизация";
     }
