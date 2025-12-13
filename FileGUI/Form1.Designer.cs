@@ -4,7 +4,8 @@ partial class Form1
 {
     private System.ComponentModel.IContainer components = null;
     
-    private System.Windows.Forms.TreeView treeView1;
+    private System.Windows.Forms.TextBox usernameTxt;
+    private System.Windows.Forms.TextBox passwordTxt;
 
     protected override void Dispose(bool disposing)
     {
@@ -18,18 +19,23 @@ partial class Form1
     
     private void InitializeComponent()
     {
-        treeView1 = new TreeView();
-        treeView1.DoubleClick += NodeClick;
+        usernameTxt = new TextBox();
+        usernameTxt.Size = new Size(100, 20);
+        usernameTxt.Location = new Point(100, 50);
+        
+        passwordTxt = new TextBox();
+        passwordTxt.Size = new Size(100, 20);
+        passwordTxt.Location = new Point(100, 100);
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
-            this.treeView1,
+            this.usernameTxt, this.passwordTxt
         });
         
         components = new System.ComponentModel.Container();
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
-        Text = "File Manager";
+        ClientSize = new Size(400, 225);
+        Text = "Авторизация";
     }
 
 }
