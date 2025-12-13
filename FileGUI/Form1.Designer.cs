@@ -16,6 +16,12 @@ partial class Form1
     
     private void InitializeComponent()
     {
+        
+        this.Controls.AddRange(new System.Windows.Forms.Control()
+        {
+            
+        });
+        
         components = new System.ComponentModel.Container();
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(800, 450);
