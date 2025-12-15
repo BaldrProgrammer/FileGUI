@@ -28,20 +28,23 @@ public partial class Form1 : Form
 
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        HttpClient client = new HttpClient();
+        using (var client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
         
-        client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var response = client
+                .PostAsync(URL + "/auth/log", content)
+                .GetAwaiter()
+                .GetResult();
+
+            string responseBody = response.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+
+            Console.WriteLine(responseBody);
+        };
         
-        var response = client
-            .PostAsync(URL + "/auth/log", content)
-            .GetAwaiter()
-            .GetResult();
-
-        string responseBody = response.Content
-            .ReadAsStringAsync()
-            .GetAwaiter()
-            .GetResult();
-
-        Console.WriteLine(responseBody);
+        
     }
 }
