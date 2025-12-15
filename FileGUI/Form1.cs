@@ -17,6 +17,31 @@ public partial class Form1 : Form
         string username = usernameTxt.Text;
         string password = passwordTxt.Text;
         
+        var body = new
+        {
+            username,
+            password,
+            is_admin = false
+        };
+
+        string json = JsonSerializer.Serialize(body);
+
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        HttpClient client = new HttpClient();
         
+        client.DefaultRequestHeaders.Add("Accept", "application/json");
+        
+        var response = client
+            .PostAsync(URL + "/auth/log", content)
+            .GetAwaiter()
+            .GetResult();
+
+        string responseBody = response.Content
+            .ReadAsStringAsync()
+            .GetAwaiter()
+            .GetResult();
+
+        Console.WriteLine(responseBody);
     }
 }
