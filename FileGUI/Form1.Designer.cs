@@ -63,5 +63,4 @@ partial class Form1
         BackColor = Color.FromArgb(200, 200, 200);
         Text = "Авторизация";
     }
-
 }
