@@ -4,7 +4,7 @@ namespace FileGUI;
 
 public partial class Form1 : Form
 {
-    const string URL = "http://155.212.223.69:8000";
+    const string Url = "http://155.212.223.69:8000";
     private string cookies = "";
     
     public Form1()
@@ -33,7 +33,7 @@ public partial class Form1 : Form
             client.DefaultRequestHeaders.Add("Accept", "application/json");
         
             var response = client
-                .PostAsync(URL + "/auth/log", content)
+                .PostAsync(Url + "/auth/log", content)
                 .GetAwaiter()
                 .GetResult();
 
@@ -41,8 +41,6 @@ public partial class Form1 : Form
                 .ReadAsStringAsync()
                 .GetAwaiter()
                 .GetResult();
-
-            Console.WriteLine(responseBody);
         };
         
         
