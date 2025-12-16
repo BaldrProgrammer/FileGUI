@@ -9,6 +9,12 @@ partial class Form1
     private System.Windows.Forms.TextBox usernameTxt;
     private System.Windows.Forms.TextBox passwordTxt;
     private System.Windows.Forms.Button sumbitBtn;
+    
+    private System.Windows.Forms.Panel regPnl;
+    private System.Windows.Forms.Label regLbl;
+    private System.Windows.Forms.TextBox regUsernameTxt;
+    private System.Windows.Forms.TextBox regPasswordTxt;
+    private System.Windows.Forms.Button regSumbitBtn;
 
     protected override void Dispose(bool disposing)
     {
@@ -52,9 +58,16 @@ partial class Form1
         sumbitBtn.Click += LogIn;
         loginPnl.Controls.Add(sumbitBtn);
         
+        loginPnl.Hide();
+        
+        regPnl = new Panel();
+        regPnl.Size = new Size(200, 250);
+        regPnl.Location = new Point(300, 75);
+        regPnl.BackColor = Color.White;
+        
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
-            this.loginPnl
+            this.loginPnl, this.regPnl
         });
         
         components = new System.ComponentModel.Container();
