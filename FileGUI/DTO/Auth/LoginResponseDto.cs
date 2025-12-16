@@ -2,6 +2,6 @@
 
 public class LoginResponseDto
 {
-    public bool Ok { set; get; }
-    public string? AccessToken { set; get; }
+    public bool ok { set; get; }
+    public string? access_token { set; get; }
 }
