@@ -90,11 +90,13 @@ public partial class Form1 : Form
         {
             if (senderr.Text == "Есть аккаунт?")
             {
-                Console.WriteLine(1);
+                regPnl.Hide();
+                loginPnl.Show();
             }
             else if (senderr.Text == "Нет аккаунта?")
             {
-                Console.WriteLine(2);
+                loginPnl.Hide();
+                regPnl.Show();
             }
         }
     }
