@@ -82,4 +82,20 @@ public partial class Form1 : Form
                 .GetResult();
         }
     }
+
+    private void ChangePanel(object sender, EventArgs e)
+    {
+        Label? senderr = sender as Label;
+        if (senderr != null)
+        {
+            if (senderr.Text == "Есть аккаунт?")
+            {
+                Console.WriteLine(1);
+            }
+            else if (senderr.Text == "Нет аккаунта?")
+            {
+                Console.WriteLine(2);
+            }
+        }
+    }
 }

@@ -67,6 +67,7 @@ partial class Form1
         logtoregSwitch.ForeColor = Color.FromArgb(6, 69, 173);
         logtoregSwitch.Cursor = Cursors.Hand;
         logtoregSwitch.Font = new Font("Times New Roman", 12);
+        logtoregSwitch.Click += ChangePanel;
         loginPnl.Controls.Add(logtoregSwitch);
         
         regPnl = new Panel();
@@ -106,9 +107,10 @@ partial class Form1
         regtologSwitch.ForeColor = Color.FromArgb(6, 69, 173);
         regtologSwitch.Cursor = Cursors.Hand;
         regtologSwitch.Font = new Font("Times New Roman", 12);
+        regtologSwitch.Click += ChangePanel;
         regPnl.Controls.Add(regtologSwitch);
         
-        loginPnl.Hide();
+        regPnl.Hide();
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
