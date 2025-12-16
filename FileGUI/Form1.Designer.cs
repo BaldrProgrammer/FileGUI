@@ -61,7 +61,7 @@ partial class Form1
         loginPnl.Controls.Add(sumbitBtn);
 
         logtoregSwitch = new Label();
-        logtoregSwitch.Text = "Есть аккаунт?";
+        logtoregSwitch.Text = "Нет аккаунта?";
         logtoregSwitch.Size = new Size(150, 20);
         logtoregSwitch.Location = new Point(20, 210);
         logtoregSwitch.ForeColor = Color.FromArgb(6, 69, 173);
@@ -75,10 +75,10 @@ partial class Form1
         regPnl.BackColor = Color.White;
         
         regLbl = new Label();
-        regLbl.Text = "Register";
-        regLbl.Size = new Size(100, 40);
+        regLbl.Text = "Регистрация";
+        regLbl.Size = new Size(150, 40);
         regLbl.Location = new Point(25, 10);
-        regLbl.Font = new Font("Times New Roman", 15);
+        regLbl.Font = new Font("Times New Roman", 14);
         regPnl.Controls.Add(regLbl);
         
         regUsernameTxt = new TextBox();
@@ -92,14 +92,23 @@ partial class Form1
         regPnl.Controls.Add(regPasswordTxt);
         
         regSumbitBtn = new Button();
-        regSumbitBtn.Text = "Регистрация";
+        regSumbitBtn.Text = "Создать";
         regSumbitBtn.Size = new Size(150, 50);
         regSumbitBtn.Location = new Point(25, 150);
-        regSumbitBtn.Font = new Font("Times New Roman", 14);
+        regSumbitBtn.Font = new Font("Times New Roman", 16);
         regSumbitBtn.Click += Register;
         regPnl.Controls.Add(regSumbitBtn);
         
-        regPnl.Hide();
+        regtologSwitch = new Label();
+        regtologSwitch.Text = "Есть аккаунт?";
+        regtologSwitch.Size = new Size(150, 20);
+        regtologSwitch.Location = new Point(20, 210);
+        regtologSwitch.ForeColor = Color.FromArgb(6, 69, 173);
+        regtologSwitch.Cursor = Cursors.Hand;
+        regtologSwitch.Font = new Font("Times New Roman", 12);
+        regPnl.Controls.Add(regtologSwitch);
+        
+        loginPnl.Hide();
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
