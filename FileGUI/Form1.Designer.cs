@@ -65,6 +65,13 @@ partial class Form1
         regPnl.Location = new Point(300, 75);
         regPnl.BackColor = Color.White;
         
+        regLbl = new Label();
+        regLbl.Text = "Register";
+        regLbl.Size = new Size(100, 40);
+        regLbl.Location = new Point(25, 10);
+        regLbl.Font = new Font("Times New Roman", 15);
+        regPnl.Controls.Add(regLbl);
+        
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
             this.loginPnl, this.regPnl
