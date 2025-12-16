@@ -26,10 +26,7 @@ public partial class Form1 : Form
             password,
             is_admin = false
         };
-        Console.WriteLine(username);
-
         string json = JsonSerializer.Serialize(body);
-
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         using (var client = new HttpClient())
@@ -51,6 +48,7 @@ public partial class Form1 : Form
             {
                 _cookies.SetCookies(_uri, $"access_token={dto.access_token}; Path=/");
             }
+            Console.WriteLine(_cookies.GetCookies(_uri).Count);
         }
     }
 }

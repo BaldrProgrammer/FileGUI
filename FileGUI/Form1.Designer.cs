@@ -29,7 +29,7 @@ partial class Form1
         
         loginLbl = new Label();
         loginLbl.Text = "LOGIN";
-        loginLbl.Size = new Size(100, 50);
+        loginLbl.Size = new Size(100, 40);
         loginLbl.Location = new Point(25, 10);
         loginLbl.Font = new Font("Times New Roman", 15);
         loginPnl.Controls.Add(loginLbl);
