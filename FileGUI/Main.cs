@@ -10,6 +10,6 @@ public partial class Main : Form
     public Main(string token)
     {
         InitializeComponent();
-        Console.WriteLine(token);
+        _cookies.SetCookies(_uri, $"access_token={token}; Path=/");
     }
 }
