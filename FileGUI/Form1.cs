@@ -56,7 +56,32 @@ public partial class Form1 : Form
     {
         string username = regUsernameTxt.Text;
         string password = regPasswordTxt.Text;
-        Console.WriteLine(username);
-        Console.WriteLine(password);
+
+        var body = new
+        {
+            username,
+            hashed_password=password,
+            is_admin = false
+        };
+        
+        string json = JsonSerializer.Serialize(body);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        
+        using (var client = new HttpClient())
+        {
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            var response = client
+                .PostAsync(Url + "/auth/register", content)
+                .GetAwaiter()
+                .GetResult();
+
+            string responseBody = response.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+            
+            Console.WriteLine(responseBody);
+        }
     }
 }
