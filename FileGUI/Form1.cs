@@ -51,4 +51,12 @@ public partial class Form1 : Form
             Console.WriteLine(_cookies.GetCookies(_uri).Count);
         }
     }
+
+    private void Register(object sender, EventArgs e)
+    {
+        string username = regUsernameTxt.Text;
+        string password = regPasswordTxt.Text;
+        Console.WriteLine(username);
+        Console.WriteLine(password);
+    }
 }

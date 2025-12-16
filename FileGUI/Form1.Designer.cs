@@ -82,6 +82,14 @@ partial class Form1
         regPasswordTxt.Location = new Point(25, 100);
         regPnl.Controls.Add(regPasswordTxt);
         
+        regSumbitBtn = new Button();
+        regSumbitBtn.Text = "Регистрация";
+        regSumbitBtn.Size = new Size(150, 50);
+        regSumbitBtn.Location = new Point(25, 150);
+        regSumbitBtn.Font = new Font("Times New Roman", 14);
+        regSumbitBtn.Click += Register;
+        regPnl.Controls.Add(regSumbitBtn);
+        
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
             this.loginPnl, this.regPnl
