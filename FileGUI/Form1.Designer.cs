@@ -9,12 +9,14 @@ partial class Form1
     private System.Windows.Forms.TextBox usernameTxt;
     private System.Windows.Forms.TextBox passwordTxt;
     private System.Windows.Forms.Button sumbitBtn;
+    private System.Windows.Forms.Label logtoregSwitch;
     
     private System.Windows.Forms.Panel regPnl;
     private System.Windows.Forms.Label regLbl;
     private System.Windows.Forms.TextBox regUsernameTxt;
     private System.Windows.Forms.TextBox regPasswordTxt;
     private System.Windows.Forms.Button regSumbitBtn;
+    private System.Windows.Forms.Label regtologSwitch;
 
     protected override void Dispose(bool disposing)
     {
@@ -34,10 +36,10 @@ partial class Form1
         loginPnl.BackColor = Color.White;
         
         loginLbl = new Label();
-        loginLbl.Text = "LOGIN";
-        loginLbl.Size = new Size(100, 40);
+        loginLbl.Text = "Авторизация";
+        loginLbl.Size = new Size(150, 40);
         loginLbl.Location = new Point(25, 10);
-        loginLbl.Font = new Font("Times New Roman", 15);
+        loginLbl.Font = new Font("Times New Roman", 14);
         loginPnl.Controls.Add(loginLbl);
         
         usernameTxt = new TextBox();
@@ -57,8 +59,15 @@ partial class Form1
         sumbitBtn.Font = new Font("Times New Roman", 16);
         sumbitBtn.Click += LogIn;
         loginPnl.Controls.Add(sumbitBtn);
-        
-        loginPnl.Hide();
+
+        logtoregSwitch = new Label();
+        logtoregSwitch.Text = "Есть аккаунт?";
+        logtoregSwitch.Size = new Size(150, 20);
+        logtoregSwitch.Location = new Point(20, 210);
+        logtoregSwitch.ForeColor = Color.FromArgb(6, 69, 173);
+        logtoregSwitch.Cursor = Cursors.Hand;
+        logtoregSwitch.Font = new Font("Times New Roman", 12);
+        loginPnl.Controls.Add(logtoregSwitch);
         
         regPnl = new Panel();
         regPnl.Size = new Size(200, 250);
@@ -89,6 +98,8 @@ partial class Form1
         regSumbitBtn.Font = new Font("Times New Roman", 14);
         regSumbitBtn.Click += Register;
         regPnl.Controls.Add(regSumbitBtn);
+        
+        regPnl.Hide();
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {

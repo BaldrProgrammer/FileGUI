@@ -80,8 +80,6 @@ public partial class Form1 : Form
                 .ReadAsStringAsync()
                 .GetAwaiter()
                 .GetResult();
-            
-            Console.WriteLine(responseBody);
         }
     }
 }
