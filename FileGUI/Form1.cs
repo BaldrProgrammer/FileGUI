@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text;
 using System.Text.Json;
 using FileGUI.DTO.Auth;
@@ -7,8 +6,6 @@ namespace FileGUI;
 public partial class Form1 : Form
 {
     const string Url = "http://155.212.223.69:8000";
-    private Uri _uri = new Uri(Url);
-    CookieContainer _cookies = new CookieContainer();
     
     public Form1()
     {
@@ -32,7 +29,7 @@ public partial class Form1 : Form
         using (var client = new HttpClient())
         {
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-        
+
             var response = client
                 .PostAsync(Url + "/auth/log", content)
                 .GetAwaiter()
@@ -42,13 +39,11 @@ public partial class Form1 : Form
                 .ReadAsStringAsync()
                 .GetAwaiter()
                 .GetResult();
-            
+
             LoginResponseDto? dto = JsonSerializer.Deserialize<LoginResponseDto>(responseBody);
-            if (dto?.access_token != null)
-            {
-                _cookies.SetCookies(_uri, $"access_token={dto.access_token}; Path=/");
-            }
-            Console.WriteLine(_cookies.GetCookies(_uri).Count);
+            Main form2 = new Main(dto.access_token);
+            form2.Show();
+            Hide();
         }
     }
 
