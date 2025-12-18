@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using System.Reflection.Metadata;
+
 namespace FileGUI;
 
 public partial class mainForm : Form
@@ -11,5 +13,11 @@ public partial class mainForm : Form
     {
         InitializeComponent();
         _cookies.SetCookies(_uri, $"access_token={token}; Path=/");
+    }
+
+    public List<string> fsd()
+    {
+        List<string> numbers = new List<string> { "FISRTFILE.txt", "SECONDFILE.txt", "THIRDFILE.exe" };
+        return numbers;
     }
 }

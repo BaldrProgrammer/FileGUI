@@ -19,7 +19,9 @@ partial class mainForm
 
     private void InitializeComponent()
     {
-        TreeView treeView1 = new TreeView();
+        treeView1 = new TreeView();
+        treeView1.Location = new Point(0, 0);
+        treeView1.Size = new Size(800, 800);
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
@@ -28,7 +30,7 @@ partial class mainForm
         
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
+        this.ClientSize = new System.Drawing.Size(1600, 800);
         this.Text = "Main";
     }
 }
