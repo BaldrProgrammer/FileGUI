@@ -2,7 +2,7 @@
 
 namespace FileGUI;
 
-partial class Main
+partial class mainForm
 {
     private IContainer components = null;
 

@@ -1,6 +1,6 @@
 ﻿namespace FileGUI;
 
-partial class Form1
+partial class authForm
 {
     private System.ComponentModel.IContainer components = null;
     
