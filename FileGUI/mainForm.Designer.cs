@@ -21,11 +21,14 @@ partial class mainForm
         treeView1 = new TreeView();
         treeView1.Location = new Point(0, 0);
         treeView1.Size = new Size(800, 800);
+        treeView1.BeforeExpand += BeforeNodeExpand;
         
-        List<string> user_files = GetUserFiles();
-        for (int i = 0; i < user_files.Count; i++)
+        foreach (string file in GetUserFiles())
         {
-            treeView1.Nodes.Add(new TreeNode(user_files[i]));
+            TreeNode parentNode = new TreeNode(file);
+            parentNode.Nodes.Add(new TreeNode("..."));
+            
+            treeView1.Nodes.Add(parentNode);
         }
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]

@@ -22,6 +22,11 @@ public partial class mainForm : Form
         InitializeComponent();
     }
 
+    public void BeforeNodeExpand(object sender, EventArgs e)
+    {
+        Console.WriteLine("BeforeNodeExpand");
+    }
+
     public List<string>? GetUserFiles()
     {
         using (var client = new HttpClient(_handler))
@@ -38,17 +43,17 @@ public partial class mainForm : Form
                 .GetAwaiter()
                 .GetResult();
 
-            List<string> numbers = new List<string>();
+            List<string> files = new List<string>();
 
             if (response.IsSuccessStatusCode)
             {
-                numbers = JsonSerializer.Deserialize<List<string>>(responseBody);
+                files = JsonSerializer.Deserialize<List<string>>(responseBody);
             }
             else
             {
                 Console.WriteLine(responseBody, response.StatusCode);
             }
-            return numbers;
+            return files;
         }
     }
 }
