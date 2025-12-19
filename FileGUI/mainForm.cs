@@ -38,7 +38,7 @@ public partial class mainForm : Form
                 .GetAwaiter()
                 .GetResult();
 
-            List<string> numbers = new List<string> { };
+            List<string> numbers = new List<string>();
 
             if (response.IsSuccessStatusCode)
             {
