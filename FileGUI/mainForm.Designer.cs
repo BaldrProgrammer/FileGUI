@@ -5,7 +5,6 @@ namespace FileGUI;
 partial class mainForm
 {
     private IContainer components = null;
-
     private TreeView treeView1;
     
     protected override void Dispose(bool disposing)
@@ -22,6 +21,10 @@ partial class mainForm
         treeView1 = new TreeView();
         treeView1.Location = new Point(0, 0);
         treeView1.Size = new Size(800, 800);
+        foreach (string filename in fsd())
+        {
+            treeView1.Nodes.Add(new TreeNode(filename));
+        }
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {

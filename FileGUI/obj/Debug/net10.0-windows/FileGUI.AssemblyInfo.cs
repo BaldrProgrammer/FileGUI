@@ -13,12 +13,12 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FileGUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7afefa93a7fc3327d1ae5a6933e88f77f38c713c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+079347366a8a184280801303b4f27a92bcb957c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FileGUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FileGUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 
-// Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
+// Создано классом WriteCodeFragment MSBuild.
 
