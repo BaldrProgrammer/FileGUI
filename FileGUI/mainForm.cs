@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Reflection.Metadata;
+using System.Text.Json;
 
 namespace FileGUI;
 
@@ -38,9 +39,9 @@ public partial class mainForm : Form
                 .GetResult();
             
             Console.WriteLine(responseBody);
+            
+            List<string> numbers = JsonSerializer.Deserialize<List<string>>(responseBody);
+            return numbers;
         }
-        
-        List<string> numbers = new List<string> { "FISRTFILE.txt", "SECONDFILE.txt", "THIRDFILE.exe" };
-        return numbers;
     }
 }
