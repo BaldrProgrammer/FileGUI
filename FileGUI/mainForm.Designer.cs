@@ -21,7 +21,7 @@ partial class mainForm
         treeView1 = new TreeView();
         treeView1.Location = new Point(0, 0);
         treeView1.Size = new Size(800, 800);
-        foreach (string filename in fsd())
+        foreach (string filename in GetUserFiles())
         {
             treeView1.Nodes.Add(new TreeNode(filename));
         }

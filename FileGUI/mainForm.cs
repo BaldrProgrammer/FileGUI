@@ -22,7 +22,7 @@ public partial class mainForm : Form
         InitializeComponent();
     }
 
-    public List<string> fsd()
+    public List<string>? GetUserFiles()
     {
         using (var client = new HttpClient(_handler))
         {
@@ -37,10 +37,17 @@ public partial class mainForm : Form
                 .ReadAsStringAsync()
                 .GetAwaiter()
                 .GetResult();
-            
-            Console.WriteLine(responseBody);
-            
-            List<string> numbers = JsonSerializer.Deserialize<List<string>>(responseBody);
+
+            List<string> numbers = new List<string> { };
+
+            if (response.IsSuccessStatusCode)
+            {
+                numbers = JsonSerializer.Deserialize<List<string>>(responseBody);
+            }
+            else
+            {
+                Console.WriteLine(responseBody, response.StatusCode);
+            }
             return numbers;
         }
     }
