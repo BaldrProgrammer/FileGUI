@@ -23,6 +23,23 @@ public partial class mainForm : Form
 
     public List<string> fsd()
     {
+        using (var client = new HttpClient(_handler))
+        {
+            var c = _cookies.GetCookies(_uri);
+            Console.WriteLine(c.Count);
+            var response = client
+                .GetAsync(Url + "/users/files")
+                .GetAwaiter()
+                .GetResult();
+
+            string responseBody = response.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+            
+            Console.WriteLine(responseBody);
+        }
+        
         List<string> numbers = new List<string> { "FISRTFILE.txt", "SECONDFILE.txt", "THIRDFILE.exe" };
         return numbers;
     }
