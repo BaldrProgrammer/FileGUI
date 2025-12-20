@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using System.Reflection.Metadata;
+using System.Text;
 using System.Text.Json;
 
 namespace FileGUI;
@@ -28,7 +28,7 @@ public partial class mainForm : Form
     {
         TreeNode senderr = e.Node;
 
-        List<string> files = GetFolderFiles();
+        List<string> files = GetFolderFiles(senderr.Text);
         senderr.Nodes.Clear();
         foreach (string file in files)
         {
@@ -66,10 +66,10 @@ public partial class mainForm : Form
         }
     }
     
-    public List<string> GetFolderFiles()
+    public List<string> GetFolderFiles(string folder)
     {
         var response = _client
-            .GetAsync(Url + "/folders/items")
+            .GetAsync(Url + $"/folders/items?filter_value={folder}&filter_type=name")
             .GetAwaiter()
             .GetResult();
 
