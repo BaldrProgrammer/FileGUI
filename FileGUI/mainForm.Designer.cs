@@ -25,10 +25,17 @@ partial class mainForm
         
         foreach (string file in GetUserFiles())
         {
-            TreeNode parentNode = new TreeNode(file);
-            parentNode.Nodes.Add(new TreeNode("..."));
+            if (!file.Contains("."))
+            {
+                TreeNode parentNode = new TreeNode(file);
+                parentNode.Nodes.Add(new TreeNode("..."));
             
-            treeView1.Nodes.Add(parentNode);
+                treeView1.Nodes.Add(parentNode);
+            }
+            else
+            {
+                treeView1.Nodes.Add(file);
+            }
         }
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
