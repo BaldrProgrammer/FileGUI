@@ -22,9 +22,16 @@ public partial class mainForm : Form
         InitializeComponent();
     }
 
-    public void BeforeNodeExpand(object sender, EventArgs e)
+    public void BeforeNodeExpand(object sender, TreeViewCancelEventArgs e)
     {
-        Console.WriteLine("BeforeNodeExpand");
+        TreeNode senderr = e.Node;
+
+        List<string> files = GetFolderFiles();
+        senderr.Nodes.Clear();
+        foreach (string file in files)
+        {
+            senderr.Nodes.Add(new TreeNode(file));
+        }
     }
 
     public List<string>? GetUserFiles()
@@ -55,5 +62,11 @@ public partial class mainForm : Form
             }
             return files;
         }
+    }
+    
+    public List<string> GetFolderFiles()
+    {
+        List<string> files = new List<string> { "123.png", "auf.mp3", "virus.exe" };
+        return files;
     }
 }
