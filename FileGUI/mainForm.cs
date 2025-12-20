@@ -10,6 +10,7 @@ public partial class mainForm : Form
     private Uri _uri = new Uri(Url);
     private HttpClientHandler _handler;
     CookieContainer _cookies = new CookieContainer();
+    private HttpClient _client;
     
     public mainForm(string token)
     {
@@ -19,6 +20,7 @@ public partial class mainForm : Form
             CookieContainer = _cookies,
             UseCookies = true
         };
+        _client = new HttpClient(_handler);
         InitializeComponent();
     }
 
@@ -36,11 +38,11 @@ public partial class mainForm : Form
 
     public List<string>? GetUserFiles()
     {
-        using (var client = new HttpClient(_handler))
+        if (true)
         {
             var c = _cookies.GetCookies(_uri);
             Console.WriteLine(c.Count);
-            var response = client
+            var response = _client
                 .GetAsync(Url + "/users/files")
                 .GetAwaiter()
                 .GetResult();
@@ -66,6 +68,18 @@ public partial class mainForm : Form
     
     public List<string> GetFolderFiles()
     {
+        var response = _client
+            .GetAsync(Url + "/folders/items")
+            .GetAwaiter()
+            .GetResult();
+
+        string responseBody = response.Content
+            .ReadAsStringAsync()
+            .GetAwaiter()
+            .GetResult();
+            
+            Console.WriteLine(responseBody);
+        
         List<string> files = new List<string> { "123.png", "auf.mp3", "virus.exe" };
         return files;
     }
