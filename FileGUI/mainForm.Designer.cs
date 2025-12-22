@@ -38,6 +38,13 @@ partial class mainForm
             }
         }
         
+        ContextMenuStrip menu = new ContextMenuStrip();
+
+        ToolStripMenuItem mkDir = new ToolStripMenuItem("Создать папку");
+        ToolStripMenuItem uploadFile = new ToolStripMenuItem("Выгрузить файл");
+        ToolStripMenuItem renameObj = new ToolStripMenuItem("Переименовать");
+        ToolStripMenuItem removeObj = new ToolStripMenuItem("Удалить");
+        
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
             this.treeView1
