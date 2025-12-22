@@ -80,7 +80,7 @@ public partial class mainForm : Form
             
             Console.WriteLine(responseBody);
         
-        List<string> files = new List<string> { "123.png", "auf.mp3", "virus.exe" };
+        List<string> files = new List<string>();
         return files;
     }
 }
