@@ -45,6 +45,11 @@ public partial class mainForm : Form
             }
         }
     }
+    
+    public void MenuShow(object sender, TreeNodeMouseClickEventArgs e)
+    {
+        menu.Show();
+    }
 
     public List<string>? GetUserFiles()
     {

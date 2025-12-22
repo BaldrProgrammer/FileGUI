@@ -6,6 +6,7 @@ partial class mainForm
 {
     private IContainer components = null;
     private TreeView treeView1;
+    private ContextMenuStrip menu;
     
     protected override void Dispose(bool disposing)
     {
@@ -22,6 +23,7 @@ partial class mainForm
         treeView1.Location = new Point(0, 0);
         treeView1.Size = new Size(800, 800);
         treeView1.BeforeExpand += BeforeNodeExpand;
+        treeView1.NodeMouseClick += MenuShow;
         
         foreach (string file in GetUserFiles())
         {
@@ -38,7 +40,7 @@ partial class mainForm
             }
         }
         
-        ContextMenuStrip menu = new ContextMenuStrip();
+        menu = new ContextMenuStrip();
 
         ToolStripMenuItem mkDir = new ToolStripMenuItem("Создать папку");
         ToolStripMenuItem uploadFile = new ToolStripMenuItem("Выгрузить файл");
