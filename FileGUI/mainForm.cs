@@ -55,6 +55,12 @@ public partial class mainForm : Form
         }
     }
 
+    public void MenuButtonClick(object sender, EventArgs e)
+    {
+        ToolStripMenuItem senderr = sender as ToolStripMenuItem;
+        Console.WriteLine(senderr.Text);
+    }
+
     public List<string>? GetUserFiles()
     {
         if (true)

@@ -46,6 +46,11 @@ partial class mainForm
         ToolStripMenuItem uploadFile = new ToolStripMenuItem("Выгрузить файл");
         ToolStripMenuItem renameObj = new ToolStripMenuItem("Переименовать");
         ToolStripMenuItem removeObj = new ToolStripMenuItem("Удалить");
+
+        mkDir.Click += MenuButtonClick;
+        uploadFile.Click += MenuButtonClick;
+        renameObj.Click += MenuButtonClick;
+        removeObj.Click += MenuButtonClick;
         
         menu.Items.Add(mkDir);
         menu.Items.Add(uploadFile);
