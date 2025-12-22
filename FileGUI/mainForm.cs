@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using System.Text;
 using System.Text.Json;
+using FileGUI.DTO.Folders;
 
 namespace FileGUI;
 
@@ -80,7 +80,9 @@ public partial class mainForm : Form
             
             Console.WriteLine(responseBody);
         
-        List<string> files = new List<string>();
+        FoldersItemsResponseDto? dto = JsonSerializer.Deserialize<FoldersItemsResponseDto>(responseBody);
+        List<string> files = dto.content;
+        
         return files;
     }
 }
