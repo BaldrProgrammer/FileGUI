@@ -45,6 +45,12 @@ partial class mainForm
         ToolStripMenuItem renameObj = new ToolStripMenuItem("Переименовать");
         ToolStripMenuItem removeObj = new ToolStripMenuItem("Удалить");
         
+        menu.Items.Add(mkDir);
+        menu.Items.Add(uploadFile);
+        menu.Items.Add(new ToolStripSeparator());
+        menu.Items.Add(mkDir);
+        menu.Items.Add(mkDir);
+        
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {
             this.treeView1
