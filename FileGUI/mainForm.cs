@@ -48,7 +48,11 @@ public partial class mainForm : Form
     
     public void MenuShow(object sender, TreeNodeMouseClickEventArgs e)
     {
-        menu.Show();
+        if (e.Button == MouseButtons.Right)
+        {
+            treeView1.SelectedNode = e.Node;
+            menu.Show(Cursor.Position);
+        }
     }
 
     public List<string>? GetUserFiles()
