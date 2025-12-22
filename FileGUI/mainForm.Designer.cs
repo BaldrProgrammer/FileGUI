@@ -55,8 +55,8 @@ partial class mainForm
         menu.Items.Add(mkDir);
         menu.Items.Add(uploadFile);
         menu.Items.Add(new ToolStripSeparator());
-        menu.Items.Add(mkDir);
-        menu.Items.Add(mkDir);
+        menu.Items.Add(renameObj);
+        menu.Items.Add(removeObj);
         
         this.Controls.AddRange(new System.Windows.Forms.Control[]
         {

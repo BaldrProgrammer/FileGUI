@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text;
 using System.Text.Json;
 using FileGUI.DTO.Folders;
 
@@ -14,6 +15,7 @@ public partial class mainForm : Form
     
     public mainForm(string token)
     {
+        Console.OutputEncoding = Encoding.UTF8;
         _cookies.SetCookies(_uri, $"access_token={token}; Path=/");
         _handler = new HttpClientHandler
         {
