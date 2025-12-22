@@ -9,8 +9,8 @@ public partial class mainForm : Form
     const string Url = "http://155.212.223.69:8000";
     private Uri _uri = new Uri(Url);
     private HttpClientHandler _handler;
-    CookieContainer _cookies = new CookieContainer();
     private HttpClient _client;
+    CookieContainer _cookies = new CookieContainer();
     
     public mainForm(string token)
     {
@@ -27,12 +27,22 @@ public partial class mainForm : Form
     public void BeforeNodeExpand(object sender, TreeViewCancelEventArgs e)
     {
         TreeNode senderr = e.Node;
-
-        List<string> files = GetFolderFiles(senderr.Text);
+        Console.WriteLine(senderr.Level);
+        List<string> files = GetFolderFiles(senderr.FullPath.Replace("\\", "/"));
         senderr.Nodes.Clear();
         foreach (string file in files)
         {
-            senderr.Nodes.Add(new TreeNode(file));
+            if (!file.Contains("."))
+            {
+                TreeNode parentNode = new TreeNode(file);
+                parentNode.Nodes.Add(new TreeNode("..."));
+            
+                senderr.Nodes.Add(parentNode);
+            }
+            else
+            {
+                senderr.Nodes.Add(new TreeNode(file));
+            }
         }
     }
 
