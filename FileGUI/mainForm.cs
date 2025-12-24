@@ -95,6 +95,11 @@ public partial class mainForm : Form
 
     public void FileRun(object sender, TreeNodeMouseClickEventArgs e)
     {
+        using (HttpClient client = new HttpClient(_handler))
+        {
+            byte[] data = client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.photo_2025-11-12_18-03-37.jpg&filter_type=name").Result;
+            File.WriteAllBytes("C:\\Users\\royal\\Desktop\\hui.jp", data);
+        }
         Console.WriteLine(Application.ExecutablePath);
     }
     
