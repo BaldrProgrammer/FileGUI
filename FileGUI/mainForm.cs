@@ -97,15 +97,13 @@ public partial class mainForm : Form
     public void FileRun(object sender, TreeNodeMouseClickEventArgs e)
     {
         Console.Write(e.Node.Text);
-        using (HttpClient client = new HttpClient(_handler))
-        {
-            byte[] data = client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
-            File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
-        }
+        
+        byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
+        File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
         
         var psi = new ProcessStartInfo
         {
-            FileName = Directory.GetCurrentDirectory()+@"\temp\photo_2025-11-12_18-03-37.jpg",
+            FileName = Directory.GetCurrentDirectory()+$@"\temp\{e.Node.Text}",
             UseShellExecute = true
         };
         Process.Start(psi);

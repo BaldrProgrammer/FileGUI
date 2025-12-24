@@ -1,12 +1,13 @@
 using System.Text;
 using System.Text.Json;
 using FileGUI.DTO.Auth;
+
 namespace FileGUI;
 
 public partial class authForm : Form
 {
     const string Url = "http://155.212.223.69:8000";
-    
+
     public authForm()
     {
         InitializeComponent();
@@ -16,7 +17,7 @@ public partial class authForm : Form
     {
         string username = usernameTxt.Text;
         string password = passwordTxt.Text;
-        
+
         var body = new
         {
             username,
@@ -55,13 +56,13 @@ public partial class authForm : Form
         var body = new
         {
             username,
-            hashed_password=password,
+            hashed_password = password,
             is_admin = false
         };
-        
+
         string json = JsonSerializer.Serialize(body);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        
+
         using (var client = new HttpClient())
         {
             client.DefaultRequestHeaders.Add("Accept", "application/json");
