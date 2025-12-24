@@ -95,12 +95,13 @@ public partial class mainForm : Form
 
     public void FileRun(object sender, TreeNodeMouseClickEventArgs e)
     {
+        Console.Write(e.Node.Text);
         using (HttpClient client = new HttpClient(_handler))
         {
-            byte[] data = client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.photo_2025-11-12_18-03-37.jpg&filter_type=name").Result;
-            File.WriteAllBytes("C:\\Users\\royal\\Desktop\\hui.jp", data);
+            byte[] data = client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
+            File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
         }
-        Console.WriteLine(Application.ExecutablePath);
+        Console.WriteLine();
     }
     
     public List<string> GetFolderFiles(string folder)
