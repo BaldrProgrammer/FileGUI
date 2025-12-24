@@ -92,6 +92,11 @@ public partial class mainForm : Form
             return files;
         }
     }
+
+    public void FileRun(object sender, TreeNodeMouseClickEventArgs e)
+    {
+        Console.WriteLine(Application.ExecutablePath);
+    }
     
     public List<string> GetFolderFiles(string folder)
     {

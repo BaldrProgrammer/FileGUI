@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 
 namespace FileGUI;
 
@@ -24,6 +25,7 @@ partial class mainForm
         treeView1.Size = new Size(800, 800);
         treeView1.BeforeExpand += BeforeNodeExpand;
         treeView1.NodeMouseClick += MenuShow;
+        treeView1.NodeMouseDoubleClick += FileRun;
         
         foreach (string file in GetUserFiles())
         {
