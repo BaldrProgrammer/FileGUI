@@ -61,14 +61,18 @@ public partial class MainForm : Form
     public void MenuButtonClick(object sender, EventArgs e)
     {
         ToolStripMenuItem senderr = sender as ToolStripMenuItem;
+        var nodeSender = treeView1.SelectedNode;
         Console.WriteLine(senderr.Text);
-        if (senderr.Text == "Создать папку")
+        if (senderr.Text == "Создать папку" && !nodeSender.Text.Contains("."))
         {
             using var popup = new InputPopup();
             popup.Location = Cursor.Position;
             popup.ShowDialog();
 
-            Console.WriteLine(popup.ResultText);
+            var response = _client.PostAsync(
+                Url +
+                $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent("")
+            );
         }
     }
 
