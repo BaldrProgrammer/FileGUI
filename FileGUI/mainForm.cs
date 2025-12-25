@@ -96,17 +96,18 @@ public partial class mainForm : Form
 
     public void FileRun(object sender, TreeNodeMouseClickEventArgs e)
     {
-        Console.Write(e.Node.Text);
-        
-        byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
-        File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
-        
-        var psi = new ProcessStartInfo
+        if (e.Node.Text.Contains("."))
         {
-            FileName = Directory.GetCurrentDirectory()+$@"\temp\{e.Node.Text}",
-            UseShellExecute = true
-        };
-        Process.Start(psi);
+            byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
+            File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
+        
+            var psi = new ProcessStartInfo
+            {
+                FileName = Directory.GetCurrentDirectory()+$@"\temp\{e.Node.Text}",
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
     }
     
     public List<string> GetFolderFiles(string folder)
