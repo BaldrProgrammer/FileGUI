@@ -74,6 +74,13 @@ public partial class MainForm : Form
                 $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent("")
             );
         }
+        else if (senderr.Text == "Удалить" && !nodeSender.Text.Contains("."))
+        {
+            var response = _client.DeleteAsync(
+                Url +
+                $"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false"
+            );
+        }
     }
 
     public List<string>? GetUserFiles()
