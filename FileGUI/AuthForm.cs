@@ -4,11 +4,11 @@ using FileGUI.DTO.Auth;
 
 namespace FileGUI;
 
-public partial class authForm : Form
+public partial class AuthForm : Form
 {
     const string Url = "http://155.212.223.69:8000";
 
-    public authForm()
+    public AuthForm()
     {
         InitializeComponent();
     }
@@ -42,7 +42,7 @@ public partial class authForm : Form
                 .GetResult();
 
             LoginResponseDto? dto = JsonSerializer.Deserialize<LoginResponseDto>(responseBody);
-            mainForm form2 = new mainForm(dto.access_token);
+            MainForm form2 = new MainForm(dto.access_token);
             form2.Show();
             Hide();
         }

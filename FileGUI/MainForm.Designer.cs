@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace FileGUI;
 
-partial class mainForm
+partial class MainForm
 {
     private IContainer components = null;
     private TreeView treeView1;
