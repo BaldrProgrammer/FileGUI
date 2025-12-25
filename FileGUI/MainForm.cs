@@ -62,6 +62,14 @@ public partial class MainForm : Form
     {
         ToolStripMenuItem senderr = sender as ToolStripMenuItem;
         Console.WriteLine(senderr.Text);
+        if (senderr.Text == "Создать папку")
+        {
+            using var popup = new InputPopup();
+            popup.Location = Cursor.Position;
+            popup.ShowDialog();
+
+            Console.WriteLine(popup.ResultText);
+        }
     }
 
     public List<string>? GetUserFiles()

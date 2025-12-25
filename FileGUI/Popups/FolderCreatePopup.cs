@@ -25,6 +25,8 @@
         submit.Size = new Size(125, 30);
         submit.Font = new Font("Times New Roman", 12);
         
+        submit.Click += (s, e) => Close();
+        
         Controls.AddRange(
             label, textBox, submit
         );
