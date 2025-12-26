@@ -80,15 +80,19 @@ public partial class MainForm : Form
                 TreeNode node = new TreeNode(popup.ResultText);
                 node.Nodes.Add(new TreeNode());
                 nodeSender.Nodes.Add(node);
-                
             }
         }
         else if (senderr.Text == "Удалить" && !nodeSender.Text.Contains("."))
         {
-            var response = _client.DeleteAsync(
-                Url +
-                $"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false"
-            );
+            var response = _client
+                .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
+                .GetAwaiter()
+                .GetResult();
+            
+            if (response.IsSuccessStatusCode)
+            {
+                nodeSender.Remove();
+            }
         }
     }
 
