@@ -38,7 +38,7 @@ public partial class MainForm : Form
             if (!file.Contains("."))
             {
                 TreeNode parentNode = new TreeNode(file);
-                parentNode.Nodes.Add(new TreeNode("..."));
+                parentNode.Nodes.Add(new TreeNode(""));
             
                 senderr.Nodes.Add(parentNode);
             }
@@ -69,10 +69,19 @@ public partial class MainForm : Form
             popup.Location = Cursor.Position;
             popup.ShowDialog();
 
-            var response = _client.PostAsync(
-                Url +
-                $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent("")
-            );
+            var response = _client
+                .PostAsync(
+                Url + $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
+                .GetAwaiter()
+                .GetResult();
+
+            if (response.IsSuccessStatusCode)
+            {
+                TreeNode node = new TreeNode(popup.ResultText);
+                node.Nodes.Add(new TreeNode());
+                nodeSender.Nodes.Add(node);
+                
+            }
         }
         else if (senderr.Text == "Удалить" && !nodeSender.Text.Contains("."))
         {

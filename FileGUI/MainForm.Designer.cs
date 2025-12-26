@@ -29,17 +29,8 @@ partial class MainForm
         
         foreach (string file in GetUserFiles())
         {
-            if (!file.Contains("."))
-            {
-                TreeNode parentNode = new TreeNode(file);
-                parentNode.Nodes.Add(new TreeNode("..."));
             
-                treeView1.Nodes.Add(parentNode);
-            }
-            else
-            {
-                treeView1.Nodes.Add(file);
-            }
+            treeView1.Nodes.Add(file);
         }
         
         menu = new ContextMenuStrip();
