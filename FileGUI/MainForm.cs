@@ -96,6 +96,25 @@ public partial class MainForm : Form
                     nodeSender.Remove();
                 }
             }
+            else
+            {
+                var files = new[] { "."+nodeSender.Text };
+                var json = JsonSerializer.Serialize(files);
+
+                var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
+                {
+                    Content = new StringContent(json, Encoding.UTF8, "application/json")
+                };
+
+                var response = _client.SendAsync(request).GetAwaiter().GetResult();
+                
+                string responseBody = response.Content
+                    .ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                
+                Console.WriteLine(responseBody);
+            }
         }
     }
 
