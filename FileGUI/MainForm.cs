@@ -82,16 +82,19 @@ public partial class MainForm : Form
                 nodeSender.Nodes.Add(node);
             }
         }
-        else if (senderr.Text == "Удалить" && !nodeSender.Text.Contains("."))
+        else if (senderr.Text == "Удалить")
         {
-            var response = _client
-                .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
-                .GetAwaiter()
-                .GetResult();
-            
-            if (response.IsSuccessStatusCode)
+            if (!nodeSender.Text.Contains("."))
             {
-                nodeSender.Remove();
+                var response = _client
+                    .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
+                    .GetAwaiter()
+                    .GetResult();
+            
+                if (response.IsSuccessStatusCode)
+                {
+                    nodeSender.Remove();
+                }
             }
         }
     }
