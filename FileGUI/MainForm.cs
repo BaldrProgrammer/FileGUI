@@ -84,6 +84,10 @@ public partial class MainForm : Form
         }
         else if (senderr.Text == "Переименовать")
         {
+            using var popup = new RenamePopup();
+            popup.Location = Cursor.Position;
+            popup.ShowDialog();
+            
             if (!nodeSender.Text.Contains("."))
             {
                 Console.WriteLine("Folder rename");
