@@ -107,13 +107,12 @@ public partial class MainForm : Form
                 };
 
                 var response = _client.SendAsync(request).GetAwaiter().GetResult();
-                
-                string responseBody = response.Content
-                    .ReadAsStringAsync()
-                    .GetAwaiter()
-                    .GetResult();
-                
-                Console.WriteLine(responseBody);
+
+                Console.WriteLine(response.StatusCode);
+                if (response.IsSuccessStatusCode)
+                {
+                    nodeSender.Remove();
+                }
             }
         }
     }
