@@ -90,7 +90,15 @@ public partial class MainForm : Form
             
             if (!nodeSender.Text.Contains("."))
             {
-                Console.WriteLine("Folder rename");
+                string UrlNew = Url +
+                                $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "" + "/" + popup.ResultText}"
+                                    .Replace(" ", "+");
+                Console.WriteLine("Folder rename"); //nodeSender.FullPath.Replace("\\", "/")
+                var response = _client
+                    .PatchAsync(UrlNew, new StringContent(""))
+                    .GetAwaiter()
+                    .GetResult();
+                Console.WriteLine(UrlNew);
             }
             else
             {
