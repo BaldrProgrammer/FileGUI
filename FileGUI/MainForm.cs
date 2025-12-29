@@ -82,6 +82,17 @@ public partial class MainForm : Form
                 nodeSender.Nodes.Add(node);
             }
         }
+        else if (senderr.Text == "Переименовать")
+        {
+            if (!nodeSender.Text.Contains("."))
+            {
+                Console.WriteLine("Folder rename");
+            }
+            else
+            {
+                Console.WriteLine("File rename");
+            }
+        }
         else if (senderr.Text == "Удалить")
         {
             if (!nodeSender.Text.Contains("."))
