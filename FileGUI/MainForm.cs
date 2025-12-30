@@ -100,7 +100,11 @@ public partial class MainForm : Form
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
                     .GetResult();
-                Console.WriteLine(UrlNew);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    nodeSender.Text = popup.ResultText;
+                }
             }
             else
             {
