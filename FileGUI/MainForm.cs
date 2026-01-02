@@ -95,7 +95,6 @@ public partial class MainForm : Form
                                 $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
                                     .Replace(" ", "+");
                 Console.WriteLine(UrlNew);
-                Console.WriteLine("Folder rename"); //nodeSender.FullPath.Replace("\\", "/")
                 var response = _client
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
@@ -108,7 +107,16 @@ public partial class MainForm : Form
             }
             else
             {
-                Console.WriteLine("File rename");
+                string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
+                string UrlNew = Url +
+                                $"/files/ren?filter_value=.readme.md&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path+"." : path+"/")+popup.ResultText}"
+                                    .Replace(" ", "+");
+                Console.WriteLine(UrlNew);
+                Console.WriteLine("Folder rename");
+                var response = _client
+                    .PatchAsync(UrlNew, new StringContent(""))
+                    .GetAwaiter()
+                    .GetResult();
             }
         }
         else if (senderr.Text == "Удалить")
