@@ -105,7 +105,7 @@ public partial class MainForm : Form
             {
                 string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
                 string UrlNew = Url +
-                                $"/files/ren?filter_value=.{nodeSender.FullPath.Replace("\\", "/")}&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path+"." : path+"/")+popup.ResultText}"
+                                $"/files/ren?filter_value={nodeSender.FullPath.Replace("\\", "/")}&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
                                     .Replace(" ", "+");
                 Console.WriteLine(UrlNew);
                 Console.WriteLine("Folder rename");
