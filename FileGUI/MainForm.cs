@@ -87,6 +87,7 @@ public partial class MainForm : Form
             using var popup = new RenamePopup();
             popup.Location = Cursor.Position;
             popup.ShowDialog();
+            HttpResponseMessage response;
             
             if (!nodeSender.Text.Contains("."))
             {
@@ -95,15 +96,10 @@ public partial class MainForm : Form
                                 $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
                                     .Replace(" ", "+");
                 Console.WriteLine(UrlNew);
-                var response = _client
+                response = _client
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
                     .GetResult();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    nodeSender.Text = popup.ResultText;
-                }
             }
             else
             {
@@ -113,10 +109,15 @@ public partial class MainForm : Form
                                     .Replace(" ", "+");
                 Console.WriteLine(UrlNew);
                 Console.WriteLine("Folder rename");
-                var response = _client
+                response = _client
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
                     .GetResult();
+            }
+            
+            if (response.IsSuccessStatusCode)
+            {
+                nodeSender.Text = popup.ResultText;
             }
         }
         else if (senderr.Text == "Удалить")
