@@ -136,7 +136,9 @@ public partial class MainForm : Form
             }
             else
             {
-                var files = new[] { "."+nodeSender.Text };
+                var files = new[] { nodeSender.FullPath.Replace("\\", "/") };
+                Console.WriteLine(files);
+                Console.WriteLine(nodeSender.FullPath);
                 var json = JsonSerializer.Serialize(files);
 
                 var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
