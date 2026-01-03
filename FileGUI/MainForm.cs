@@ -206,7 +206,7 @@ public partial class MainForm : Form
     {
         if (e.Node.Text.Contains("."))
         {
-            byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value=.{e.Node.Text}&filter_type=name").Result;
+            byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value={e.Node.Text}&filter_type=name").Result;
             File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
         
             var psi = new ProcessStartInfo
