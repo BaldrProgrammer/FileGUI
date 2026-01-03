@@ -65,15 +65,15 @@ public partial class MainForm : Form
         Console.WriteLine(senderr.Text);
         if (senderr.Text == "Создать папку" && !nodeSender.Text.Contains("."))
         {
-            
+            CreateFolder(nodeSender);
         }
         else if (senderr.Text == "Переименовать")
         {
-            
+            Rename(nodeSender);
         }
         else if (senderr.Text == "Удалить")
         {
-            
+            Remove(nodeSender);
         }
     }
 
