@@ -65,94 +65,109 @@ public partial class MainForm : Form
         Console.WriteLine(senderr.Text);
         if (senderr.Text == "Создать папку" && !nodeSender.Text.Contains("."))
         {
-            using var popup = new InputPopup();
-            popup.Location = Cursor.Position;
-            popup.ShowDialog();
-
-            var response = _client
-                .PostAsync(
-                Url + $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
-                .GetAwaiter()
-                .GetResult();
-
-            if (response.IsSuccessStatusCode)
-            {
-                TreeNode node = new TreeNode(popup.ResultText);
-                node.Nodes.Add(new TreeNode());
-                nodeSender.Nodes.Add(node);
-            }
+            
         }
         else if (senderr.Text == "Переименовать")
         {
-            using var popup = new RenamePopup();
-            popup.Location = Cursor.Position;
-            popup.ShowDialog();
-            HttpResponseMessage response;
             
-            if (!nodeSender.Text.Contains("."))
-            {
-                string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
-                string UrlNew = Url +
-                                $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
-                                    .Replace(" ", "+");
-                Console.WriteLine(UrlNew);
-                response = _client
-                    .PatchAsync(UrlNew, new StringContent(""))
-                    .GetAwaiter()
-                    .GetResult();
-            }
-            else
-            {
-                string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
-                string UrlNew = Url +
-                                $"/files/ren?filter_value={nodeSender.FullPath.Replace("\\", "/")}&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
-                                    .Replace(" ", "+");
-                Console.WriteLine(UrlNew);
-                Console.WriteLine("Folder rename");
-                response = _client
-                    .PatchAsync(UrlNew, new StringContent(""))
-                    .GetAwaiter()
-                    .GetResult();
-            }
-            
-            if (response.IsSuccessStatusCode)
-            {
-                nodeSender.Text = popup.ResultText;
-            }
         }
         else if (senderr.Text == "Удалить")
         {
-            if (!nodeSender.Text.Contains("."))
-            {
-                var response = _client
-                    .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
-                    .GetAwaiter()
-                    .GetResult();
             
-                if (response.IsSuccessStatusCode)
-                {
-                    nodeSender.Remove();
-                }
-            }
-            else
+        }
+    }
+
+    public void CreateFolder(TreeNode nodeSender)
+    {
+        using var popup = new InputPopup();
+        popup.Location = Cursor.Position;
+        popup.ShowDialog();
+
+        var response = _client
+            .PostAsync(
+                Url + $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
+            .GetAwaiter()
+            .GetResult();
+
+        if (response.IsSuccessStatusCode)
+        {
+            TreeNode node = new TreeNode(popup.ResultText);
+            node.Nodes.Add(new TreeNode());
+            nodeSender.Nodes.Add(node);
+        }
+    }
+
+    public void Rename(TreeNode nodeSender)
+    {
+        using var popup = new RenamePopup();
+        popup.Location = Cursor.Position;
+        popup.ShowDialog();
+        HttpResponseMessage response;
+            
+        if (!nodeSender.Text.Contains("."))
+        {
+            string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
+            string UrlNew = Url +
+                            $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
+                                .Replace(" ", "+");
+            Console.WriteLine(UrlNew);
+            response = _client
+                .PatchAsync(UrlNew, new StringContent(""))
+                .GetAwaiter()
+                .GetResult();
+        }
+        else
+        {
+            string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
+            string UrlNew = Url +
+                            $"/files/ren?filter_value={nodeSender.FullPath.Replace("\\", "/")}&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path : path+"/")+popup.ResultText}"
+                                .Replace(" ", "+");
+            Console.WriteLine(UrlNew);
+            Console.WriteLine("Folder rename");
+            response = _client
+                .PatchAsync(UrlNew, new StringContent(""))
+                .GetAwaiter()
+                .GetResult();
+        }
+            
+        if (response.IsSuccessStatusCode)
+        {
+            nodeSender.Text = popup.ResultText;
+        }
+    }
+
+    public void Remove(TreeNode nodeSender)
+    {
+        if (!nodeSender.Text.Contains("."))
+        {
+            var response = _client
+                .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
+                .GetAwaiter()
+                .GetResult();
+            
+            if (response.IsSuccessStatusCode)
             {
-                var files = new[] { nodeSender.FullPath.Replace("\\", "/") };
-                Console.WriteLine(files);
-                Console.WriteLine(nodeSender.FullPath);
-                var json = JsonSerializer.Serialize(files);
+                nodeSender.Remove();
+            }
+        }
+        else
+        {
+            var files = new[] { nodeSender.FullPath.Replace("\\", "/") };
+            Console.WriteLine(files);
+            Console.WriteLine(nodeSender.FullPath);
+            var json = JsonSerializer.Serialize(files);
 
-                var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
-                {
-                    Content = new StringContent(json, Encoding.UTF8, "application/json")
-                };
+            var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
+            {
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
 
-                var response = _client.SendAsync(request).GetAwaiter().GetResult();
+            var response = _client.SendAsync(request).GetAwaiter().GetResult();
 
-                Console.WriteLine(response.StatusCode);
-                if (response.IsSuccessStatusCode)
-                {
-                    nodeSender.Remove();
-                }
+            Console.WriteLine(response.StatusCode);
+            if (response.IsSuccessStatusCode)
+            {
+                nodeSender.Remove();
             }
         }
     }
