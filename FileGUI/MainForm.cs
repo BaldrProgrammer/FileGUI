@@ -88,7 +88,7 @@ public partial class MainForm : Form
 
         var response = _client
             .PostAsync(
-                Url + $"/folders/mkdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}/{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
+                Url + $"/folders/mkdir?folder_path={(nodeSender.Tag != "mainnode" ? nodeSender.FullPath.Replace("\\", "/")+"/" : "")}{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
             .GetAwaiter()
             .GetResult();
 
