@@ -172,16 +172,6 @@ public partial class MainForm : Form
             }
         }
     }
-    
-    public UserGetDto GetUser()
-    {
-        var response = _client
-            .GetAsync(Url + "/users/current")
-            .GetAwaiter()
-            .GetResult();
-        
-        return new UserGetDto();
-    }
 
     public List<string>? GetUserFiles()
     {
@@ -227,6 +217,27 @@ public partial class MainForm : Form
             };
             Process.Start(psi);
         }
+    }
+    
+    public UserGetDto GetUser()
+    {
+        var response = _client
+            .GetAsync(Url + "/users/current")
+            .GetAwaiter()
+            .GetResult();
+        
+        string responseBody = response.Content
+            .ReadAsStringAsync()
+            .GetAwaiter()
+            .GetResult();
+
+        UserGetDto? dto = JsonSerializer.Deserialize<UserGetDto>(responseBody);
+        
+        if (dto != null)
+        {
+            return dto;
+        }
+        return new UserGetDto();
     }
     
     public List<string> GetFolderFiles(string folder)

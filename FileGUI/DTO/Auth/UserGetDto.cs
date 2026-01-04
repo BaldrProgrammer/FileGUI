@@ -2,8 +2,8 @@
 
 public class UserGetDto
 {
-    private int id;
-    private string username;
-    private string hashed_password;
-    private bool is_admin;
+    public int id { get; set; }
+    public string username { set; get; }
+    public string hashed_password { set; get; }
+    public bool is_admin { set; get; }
 }
