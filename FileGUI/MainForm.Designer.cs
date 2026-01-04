@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using FileGUI.DTO.Auth;
 
 namespace FileGUI;
 
@@ -26,6 +27,11 @@ partial class MainForm
         treeView1.BeforeExpand += BeforeNodeExpand;
         treeView1.NodeMouseClick += MenuShow;
         treeView1.NodeMouseDoubleClick += FileRun;
+
+        UserGetDto user = GetUser();
+        TreeNode mainNode = new TreeNode(user.username);
+        mainNode.Tag = "mainnode";
+        treeView1.Nodes.Add(mainNode);
         
         foreach (string file in GetUserFiles())
         {
@@ -34,11 +40,11 @@ partial class MainForm
                 TreeNode parentNode = new TreeNode(file);
                 parentNode.Nodes.Add(new TreeNode("..."));
             
-                treeView1.Nodes.Add(parentNode);
+                mainNode.Nodes.Add(parentNode);
             }
             else
             {
-                treeView1.Nodes.Add(file);
+                mainNode.Nodes.Add(file);
             }
         }
         
