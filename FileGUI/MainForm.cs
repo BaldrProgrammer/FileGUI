@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using FileGUI.DTO.Auth;
 using FileGUI.DTO.Folders;
 
 namespace FileGUI;
@@ -170,6 +171,16 @@ public partial class MainForm : Form
                 nodeSender.Remove();
             }
         }
+    }
+    
+    public UserGetDto GetUser()
+    {
+        var response = _client
+            .GetAsync(Url + "/users/current")
+            .GetAwaiter()
+            .GetResult();
+        
+        return new UserGetDto();
     }
 
     public List<string>? GetUserFiles()
