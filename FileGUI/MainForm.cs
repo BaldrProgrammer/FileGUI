@@ -216,7 +216,8 @@ public partial class MainForm : Form
     {
         if (e.Node.Text.Contains("."))
         {
-            byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value={e.Node.FullPath.Replace("\\", "/")}&filter_type=name").Result;
+            string fsObjectPath = string.Join("/", e.Node.FullPath.Replace("\\", "/").Split('/').Skip(1));
+            byte[] data = _client.GetByteArrayAsync(Url + $"/files/content/?filter_value={fsObjectPath}&filter_type=name").Result;
             File.WriteAllBytes(Directory.GetCurrentDirectory()+$"/temp/{e.Node.Text}", data);
         
             var psi = new ProcessStartInfo
