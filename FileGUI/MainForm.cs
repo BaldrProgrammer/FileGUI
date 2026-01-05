@@ -149,8 +149,9 @@ public partial class MainForm : Form
         {
             if (!nodeSender.Text.Contains("."))
             {
+                string fsObjectPath = string.Join("/", nodeSender.FullPath.Replace("\\", "/").Split('/').Skip(1));
                 var response = _client
-                    .DeleteAsync(Url+$"/folders/rmdir?folder_path={nodeSender.FullPath.Replace("\\", "/")}&hard=false")
+                    .DeleteAsync(Url+$"/folders/rmdir?folder_path={fsObjectPath}&hard=false")
                     .GetAwaiter()
                     .GetResult();
             
@@ -161,9 +162,8 @@ public partial class MainForm : Form
             }
             else
             {
-                var files = new[] { nodeSender.FullPath.Replace("\\", "/") };
-                Console.WriteLine(files);
-                Console.WriteLine(nodeSender.FullPath);
+                string fsObjectPath = string.Join("/", nodeSender.FullPath.Replace("\\", "/").Split('/').Skip(1));
+                var files = new[] { fsObjectPath };
                 var json = JsonSerializer.Serialize(files);
 
                 var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
