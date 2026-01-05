@@ -118,7 +118,6 @@ public partial class MainForm : Form
                 string UrlNew = Url +
                                 $"/folders/ren?old_path={fsOldObjectPath}&new_path={(string.IsNullOrEmpty(fsObjectPath) ? fsObjectPath : fsObjectPath + "/") + popup.ResultText}"
                                     .Replace(" ", "+");
-                Console.WriteLine(UrlNew);
                 response = _client
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
@@ -127,11 +126,11 @@ public partial class MainForm : Form
             else
             {
                 string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
+                string fsObjectPath = string.Join("/", path.Split('/').Skip(1));
+                string fsOldObjectPath = string.Join("/", nodeSender.FullPath.Replace("\\", "/").Split('/').Skip(1));
                 string UrlNew = Url +
-                                $"/files/ren?filter_value={nodeSender.FullPath.Replace("\\", "/")}&filter_type=name&newname={(string.IsNullOrEmpty(path) ? path : path + "/") + popup.ResultText}"
+                                $"/files/ren?filter_value={fsOldObjectPath}&filter_type=name&newname={(string.IsNullOrEmpty(fsObjectPath) ? fsObjectPath : fsObjectPath + "/") + popup.ResultText}"
                                     .Replace(" ", "+");
-                Console.WriteLine(UrlNew);
-                Console.WriteLine("Folder rename");
                 response = _client
                     .PatchAsync(UrlNew, new StringContent(""))
                     .GetAwaiter()
