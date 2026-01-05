@@ -113,8 +113,10 @@ public partial class MainForm : Form
             if (!nodeSender.Text.Contains("."))
             {
                 string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
+                string fsObjectPath = string.Join("/", path.Split('/').Skip(1));
+                string fsOldObjectPath = string.Join("/", nodeSender.FullPath.Replace("\\", "/").Split('/').Skip(1));
                 string UrlNew = Url +
-                                $"/folders/ren?old_path={nodeSender.FullPath.Replace("\\", "/")}&new_path={(string.IsNullOrEmpty(path) ? path : path + "/") + popup.ResultText}"
+                                $"/folders/ren?old_path={fsOldObjectPath}&new_path={(string.IsNullOrEmpty(fsObjectPath) ? fsObjectPath : fsObjectPath + "/") + popup.ResultText}"
                                     .Replace(" ", "+");
                 Console.WriteLine(UrlNew);
                 response = _client
