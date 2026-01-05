@@ -33,7 +33,8 @@ public partial class MainForm : Form
         TreeNode senderr = e.Node;
         if (senderr.Tag != "mainnode")
         {
-            List<string> files = GetFolderFiles(senderr.FullPath.Replace("\\", "/"));
+            string fsObjectPath = string.Join("/", senderr.FullPath.Replace("\\", "/").Split('/').Skip(1));
+            List<string> files = GetFolderFiles(fsObjectPath);
             senderr.Nodes.Clear();
             foreach (string file in files)
             {
