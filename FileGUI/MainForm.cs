@@ -71,6 +71,10 @@ public partial class MainForm : Form
         {
             CreateFolder(nodeSender);
         }
+        else if (senderr.Text == "Создать файл" && !nodeSender.Text.Contains("."))
+        {
+            CreateFile(nodeSender);
+        }
         else if (senderr.Text == "Переименовать")
         {
             Rename(nodeSender);
@@ -99,6 +103,11 @@ public partial class MainForm : Form
             node.Nodes.Add(new TreeNode());
             nodeSender.Nodes.Add(node);
         }
+    }
+
+    public void CreateFile(TreeNode nodeSender)
+    {
+        Console.WriteLine(true);
     }
 
     public void Rename(TreeNode nodeSender)
