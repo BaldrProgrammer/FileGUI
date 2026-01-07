@@ -107,7 +107,9 @@ public partial class MainForm : Form
 
     public void CreateFile(TreeNode nodeSender)
     {
-        Console.WriteLine(true);
+        using var popup = new FileCreatePopup();
+        popup.Location = Cursor.Position;
+        popup.ShowDialog();
     }
 
     public void Rename(TreeNode nodeSender)
