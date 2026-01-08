@@ -110,6 +110,12 @@ public partial class MainForm : Form
         using var popup = new FileCreatePopup();
         popup.Location = Cursor.Position;
         popup.ShowDialog();
+
+        var response = _client
+            .PostAsync(
+                Url + $"/files/touch?filepath={(nodeSender.Tag != "mainnode" ? nodeSender.FullPath.Replace("\\", "/")+"/" : "")}{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
+            .GetAwaiter()
+            .GetResult();
     }
 
     public void Rename(TreeNode nodeSender)
