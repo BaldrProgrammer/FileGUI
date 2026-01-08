@@ -116,6 +116,13 @@ public partial class MainForm : Form
                 Url + $"/files/touch?filepath={(nodeSender.Tag != "mainnode" ? nodeSender.FullPath.Replace("\\", "/")+"/" : "")}{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
             .GetAwaiter()
             .GetResult();
+        
+        if (response.IsSuccessStatusCode)
+        {
+            TreeNode node = new TreeNode(popup.ResultText);
+            node.Nodes.Add(new TreeNode());
+            nodeSender.Nodes.Add(node);
+        }
     }
 
     public void Rename(TreeNode nodeSender)
@@ -184,7 +191,7 @@ public partial class MainForm : Form
                 var files = new[] { fsObjectPath };
                 var json = JsonSerializer.Serialize(files);
 
-                var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/?filter_type=name")
+                var request = new HttpRequestMessage(HttpMethod.Delete, Url+"/files/remove?filter_type=name")
                 {
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
                 };
