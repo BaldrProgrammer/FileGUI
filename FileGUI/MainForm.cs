@@ -75,6 +75,10 @@ public partial class MainForm : Form
         {
             CreateFile(nodeSender);
         }
+        else if (senderr.Text == "Выгрузить файл" && !nodeSender.Text.Contains("."))
+        {
+            UploadFile(nodeSender);
+        }
         else if (senderr.Text == "Переименовать")
         {
             Rename(nodeSender);
@@ -123,6 +127,11 @@ public partial class MainForm : Form
             node.Nodes.Add(new TreeNode());
             nodeSender.Nodes.Add(node);
         }
+    }
+
+    public void UploadFile(TreeNode nodesender)
+    {
+        Console.WriteLine(nodesender.Text);
     }
 
     public void Rename(TreeNode nodeSender)
