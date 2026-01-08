@@ -51,16 +51,19 @@ partial class MainForm
         menu = new ContextMenuStrip();
 
         ToolStripMenuItem mkDir = new ToolStripMenuItem("Создать папку");
+        ToolStripMenuItem createFile = new ToolStripMenuItem("Создать файл");
         ToolStripMenuItem uploadFile = new ToolStripMenuItem("Выгрузить файл");
         ToolStripMenuItem renameObj = new ToolStripMenuItem("Переименовать");
         ToolStripMenuItem removeObj = new ToolStripMenuItem("Удалить");
 
         mkDir.Click += MenuButtonClick;
+        createFile.Click += MenuButtonClick;
         uploadFile.Click += MenuButtonClick;
         renameObj.Click += MenuButtonClick;
         removeObj.Click += MenuButtonClick;
         
         menu.Items.Add(mkDir);
+        menu.Items.Add(createFile);
         menu.Items.Add(uploadFile);
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add(renameObj);
