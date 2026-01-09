@@ -131,7 +131,20 @@ public partial class MainForm : Form
 
     public void UploadFile(TreeNode nodesender)
     {
-        Console.WriteLine(nodesender.Text);
+        using (OpenFileDialog fd = new OpenFileDialog())
+        {
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine(fd.FileName);
+                using (FileStream stream = File.OpenRead(fd.FileName))
+                {
+                    MultipartFormDataContent content = new MultipartFormDataContent
+                    {
+                        { new StreamContent(stream), "File" }
+                    };
+                }
+            }
+        }
     }
 
     public void Rename(TreeNode nodeSender)
