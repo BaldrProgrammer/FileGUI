@@ -140,8 +140,14 @@ public partial class MainForm : Form
                 {
                     MultipartFormDataContent content = new MultipartFormDataContent
                     {
-                        { new StreamContent(stream), "File" }
+                        { new StreamContent(stream), "uploaded_files", Path.GetFileName(fd.FileName) }
                     };
+
+                    var request = new HttpRequestMessage(HttpMethod.Post, Url + "/files/?folder=.")
+                    {
+                        Content = content
+                    };
+                    var response = _client.SendAsync(request).GetAwaiter().GetResult();
                 }
             }
         }
