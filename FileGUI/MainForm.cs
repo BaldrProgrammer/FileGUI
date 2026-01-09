@@ -129,7 +129,7 @@ public partial class MainForm : Form
         }
     }
 
-    public void UploadFile(TreeNode nodesender)
+    public void UploadFile(TreeNode nodeSender)
     {
         using (OpenFileDialog fd = new OpenFileDialog())
         {
@@ -144,7 +144,9 @@ public partial class MainForm : Form
                         MultipartFormDataContent content = new MultipartFormDataContent();
                         content.Add(new StreamContent(stream), "uploaded_files", Path.GetFileName(file));
 
-                        var request = new HttpRequestMessage(HttpMethod.Post, Url + "/files/?folder=.")
+                        string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? ".";
+                        string fsObjectPath = string.Join("/", path.Split('/').Skip(1));
+                        var request = new HttpRequestMessage(HttpMethod.Post, Url + $"/files/?folder={fsObjectPath}")
                         {
                             Content = content
                         };
@@ -153,7 +155,7 @@ public partial class MainForm : Form
                         if (response.IsSuccessStatusCode)
                         {
                             TreeNode node = new TreeNode(Path.GetFileName(file));
-                            nodesender.Nodes.Add(node);
+                            nodeSender.Nodes.Add(node);
                         }
                     }
                 }
