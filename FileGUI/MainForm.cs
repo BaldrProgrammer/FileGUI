@@ -133,21 +133,23 @@ public partial class MainForm : Form
     {
         using (OpenFileDialog fd = new OpenFileDialog())
         {
+            fd.Multiselect = true;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine(fd.FileName);
-                using (FileStream stream = File.OpenRead(fd.FileName))
+                string[] files = fd.FileNames;
+                foreach (string file in files)
                 {
-                    MultipartFormDataContent content = new MultipartFormDataContent
+                    using (FileStream stream = File.OpenRead(file))
                     {
-                        { new StreamContent(stream), "uploaded_files", Path.GetFileName(fd.FileName) }
-                    };
+                        MultipartFormDataContent content = new MultipartFormDataContent();
+                        content.Add(new StreamContent(stream), "uploaded_files", Path.GetFileName(file));
 
-                    var request = new HttpRequestMessage(HttpMethod.Post, Url + "/files/?folder=.")
-                    {
-                        Content = content
-                    };
-                    var response = _client.SendAsync(request).GetAwaiter().GetResult();
+                        var request = new HttpRequestMessage(HttpMethod.Post, Url + "/files/?folder=.")
+                        {
+                            Content = content
+                        };
+                        var response = _client.SendAsync(request).GetAwaiter().GetResult();
+                    }
                 }
             }
         }
