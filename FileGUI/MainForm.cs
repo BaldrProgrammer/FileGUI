@@ -149,6 +149,12 @@ public partial class MainForm : Form
                             Content = content
                         };
                         var response = _client.SendAsync(request).GetAwaiter().GetResult();
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            TreeNode node = new TreeNode(Path.GetFileName(file));
+                            nodesender.Nodes.Add(node);
+                        }
                     }
                 }
             }
