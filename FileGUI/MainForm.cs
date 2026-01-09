@@ -96,9 +96,7 @@ public partial class MainForm : Form
         popup.ShowDialog();
 
         string path = nodeSender.FullPath.Replace("\\", "/");
-        Console.WriteLine(path);
         string fsObjectPath = string.Join("/", path.Split('/').Skip(1)) + "/" + popup.ResultText.Replace(" ", "+");
-        Console.WriteLine(fsObjectPath);
         var response = _client
             .PostAsync(
                 Url + $"/folders/mkdir?folder_path={fsObjectPath}", new StringContent(""))
@@ -119,11 +117,11 @@ public partial class MainForm : Form
         popup.Location = Cursor.Position;
         popup.ShowDialog();
 
-        string path = nodeSender.Parent?.FullPath.Replace("\\", "/") ?? "";
-        string fsObjectPath = string.Join("/", path.Split('/').Skip(1));
+        string path = nodeSender.FullPath.Replace("\\", "/");
+        string fsObjectPath = string.Join("/", path.Split('/').Skip(1)) + "/" + popup.ResultText.Replace(" ", "+");
         var response = _client
             .PostAsync(
-                Url + $"/files/touch?filepath={fsObjectPath}{popup.ResultText.Replace(" ", "+")}", new StringContent(""))
+                Url + $"/files/touch?filepath={fsObjectPath}", new StringContent(""))
             .GetAwaiter()
             .GetResult();
         
