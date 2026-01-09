@@ -1,5 +1,7 @@
 ﻿class FileCreatePopup : Form
 {
+    public string ResultText => textBox.Text;
+    
     private Label label;
     private TextBox textBox;
     private Button submit;
@@ -24,5 +26,12 @@
         submit.Font = new Font("Times New Roman", 12);
         
         submit.Click += (s, e) => Close();
+        
+        Controls.AddRange(
+            label, textBox, submit
+        );
+        
+        Size = new Size(300, 200);
+        Deactivate += (s, e) => Close();
     }
 }

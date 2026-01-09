@@ -31,8 +31,7 @@
             label, textBox, submit
         );
         
-        Size = new Size(300, 200
-            );
+        Size = new Size(300, 200);
         Deactivate += (s, e) => Close();
     }
 }
