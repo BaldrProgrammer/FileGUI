@@ -256,7 +256,7 @@ public partial class MainForm : Form
             var c = _cookies.GetCookies(_uri);
             Console.WriteLine(c.Count);
             var response = _client
-                .GetAsync(Url + "/users/files")
+                .GetAsync(Url + "/users/items")
                 .GetAwaiter()
                 .GetResult();
 
